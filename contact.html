@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Contacts | ATLAS </title>
+    <style>
+        body {
+            background-image: url('images/bg1.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-shadow: 0 0 10px #05d9e8;
+            font-family: 'Courier New', monospace;
+    }
+
+        /* ===== Header & Navigation ===== */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid #ff2a6d;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+    }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+    }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+     }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff2a6d;
+            text-shadow: 0 0 10px #ff2a6d;
+            letter-spacing: 2px;
+            text-decoration: none;
+    }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+    }
+
+        nav ul li {
+            margin-left: 2rem;
+    }
+
+        nav ul li a {
+            color: #05d9e8;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+    }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00ff9d;
+            transition: width 0.3s ease;
+    }
+
+        nav ul li a:hover::after {
+            width: 100%;
+    }
+
+        /* ===== Main Content ===== */
+        .main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+    }
+
+        /* ===== Contact Page ===== */
+        .contact {
+			text-align: center;
+            padding: 4rem 0;
+    }
+
+        .contact h2 {
+		    text-align: center;
+            font-size: 2.5rem;
+            color: #ff2a6d;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #ff2a6d;
+            font-family: 'Courier New', monospace;
+    }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+			align-items: center;
+            font-family: 'Courier New', monospace;
+    }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #05d9e8;
+			text-align: center;
+            font-family: 'Courier New', monospace;
+    }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff2a6d;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+			text-align: center;
+    }
+
+        .form-group textarea {
+            min-height: 150px;
+    }
+
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: #05d9e8;
+            border: 1px solid #05d9e8;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+    }
+
+        .btn:hover {
+            background: #05d9e8;
+            color: #000000;
+            box-shadow: 0 0 10px #05d9e8, 0 0 20px #05d9e8;
+    }
+		
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8;
+                transform: translate(0);
+            }
+            25% {
+                text-shadow: -2px 0 #d300c5, 2px 0 #00ff9d;
+                transform: translate(-2px, 2px);
+            }
+            50% {
+                text-shadow: 2px 0 #d300c5, -2px 0 #00ff9d;
+                transform: translate(2px, -2px);
+            }
+            75% {
+                text-shadow: -2px 0 #ff2a6d, 2px 0 #05d9e8;
+                transform: translate(-2px, 2px);
+            }
+            100% {
+                text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8;
+                transform: translate(0);
+            }
+    }
+
+        .glitch-effect {
+            animation: glitch 1s linear infinite;
+    }
+        .glitch-hover:hover {
+            animation: glitch 0.5s linear infinite;
+    }
+
+        /* ===== Footer ===== */
+        footer {
+            background-color: #000000;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #ff2a6d;
+            color: #ff2a6d;
+            text-shadow: 0 0 10px #ff2a6d;
+    }
+		
+			.team-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1rem;
+			margin-top: 1rem;
+	}
+			.contact-description {
+			font-size: 1rem;
+			color: #00ff9d;
+			max-width: 500px;
+			margin: 0 auto 2rem auto;
+			text-shadow: 0 0 8px #05d9e8;
+	}
+			.social-icons {
+			display: flex;
+			justify-content: center;
+			gap: 1.5rem;
+			margin-top: 1.5rem;
+	}
+
+			.social-icon {
+			font-size: 2rem;
+			color:  #00ff9d;
+			transition: transform 0.3s ease, color 0.3s ease;
+	}
+
+			.social-icon:hover {
+			transform: scale(1.2);
+			color: #ff2a6d;
+	}
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+    }
+
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr auto; 
+    }
+
+        .main {
+            min-height: auto;  
+    }
+
+        footer {
+            grid-row: 3; 
+            width: 100%;
+    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+    }
+
+        .logo-img {
+            height: 40px; 
+            width: auto;
+            filter: drop-shadow(0 0 5px #ff2a6d) 
+            drop-shadow(0 0 10px #05d9e8);
+            transition: all 0.3s ease;
+    }
+
+        .logo:hover .logo-img {
+            filter: drop-shadow(0 0 8px #ff2a6d) 
+            drop-shadow(0 0 15px #05d9e8)
+            hue-rotate(45deg);
+    }  
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="homepage.html" class="logo">
+                    <img src="images/LOGO ORIGINAL.png" alt="ATLAS Logo" class="logo-img">
+                    ATLAS
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="cyberware.html">Cyberware</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="contact">
+            <div class="container">
+                <h2 class="glitch-effect">CONTACT US</h2>
+				<p class="contact-description">Have questions or want to collaborate? Reach out to us, and we'll get back to you as soon as possible!</p>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+						<label for="name">YOUR NAME</label>
+						<input type="text" id="name" placeholder="Enter your name" required>
+					</div>
+					<div class="form-group">
+						<label for="email">YOUR EMAIL</label>
+						<input type="email" id="email" placeholder="Enter your email" required>
+					</div>
+					<div class="form-group">
+						<label for="subject">SUBJECT</label>
+						<input type="text" id="subject" placeholder="Enter the subject" required>
+					</div>
+					<div class="form-group">
+						<label for="message">MESSAGE</label>
+						<textarea id="message" placeholder="Type your message here..." required></textarea>
+					</div>
+                        <button type="submit" class="btn">SEND MESSAGE</button>
+                    </form>
+					<div class="social-icons">
+					<a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+					<a href="mailto:@email.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+					<a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+				</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ATLAS. All rights reserved. </p>
+        </div>
+    </footer>
+</body>
+</html>

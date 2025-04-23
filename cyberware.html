@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cyberware Timeline | ATLAS </title>
+    <style>   
+       body {
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/bg1.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Courier New', monospace;
+        }
+        /* ===== Header & Navigation ===== */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid #ff2a6d;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-shadow: 0 0 10px #05d9e8;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff2a6d;
+            text-shadow: 0 0 10px #ff2a6d;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: #05d9e8;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00ff9d;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* ===== Main Content ===== */
+        .main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+    
+        .era {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 3rem;
+        }
+        .era-subtitle{
+            color: #ffffff;
+        }
+
+        .cyber-bullet {
+            color: #00ff9d;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0 0 8px #00ff9d;
+        }
+
+        .cyber-card {
+            background: rgba(10, 10, 30, 0.7);
+            border-left: 3px solid #05d9e8;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .cyber-name {
+            color: #05d9e8;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #05d9e8;
+        }
+
+        .cyber-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 25px rgba(255, 42, 109, 0.4),
+                        inset 0 0 15px rgba(255, 42, 109, 0.2);
+            border-color: #ff2a6d;
+        }
+
+        .media-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .media-desc{
+            text-align: center;
+        }
+
+        .media-holo-card {
+            position: relative;
+            border: 1px solid #05d9e8;
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.2),
+                        inset 0 0 10px rgba(5, 217, 232, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(10, 20, 30, 0.6);
+            overflow: hidden;
+        }
+
+        .holo-image {
+            height: 250px; 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            filter: hue-rotate(0deg) contrast(110%) brightness(90%);
+            transition: all 0.5s ease;
+        }
+
+        .media-holo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 25px rgba(255, 42, 109, 0.4),
+                        inset 0 0 15px rgba(255, 42, 109, 0.2);
+            border-color: #ff2a6d;
+        }
+
+        .media-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #00ff9d;
+            text-shadow: 0 0 8px #00ff9d;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            margin-top: 80px; 
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50px; 
+            width: 2px; 
+            height: 100%; 
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                #05d9e8 10%, 
+                #ff2a6d 50%, 
+                #d300c5 90%, 
+                transparent 100%);
+        }
+        .cyber-bullet::before {
+            content: "➤";
+            color: cyan;
+            text-shadow: 0px 0px 5px cyan;
+            margin-right: 8px; 
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 20px; }
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #05d9e8;
+            text-shadow: 0 0 10px #05d9e8;
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8;
+                transform: translate(0);
+            }
+            20% {
+                text-shadow: -2px 0 #d300c5, 2px 0 #00ff9d;
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                text-shadow: 2px 0 #d300c5, -2px 0 #00ff9d;
+                transform: translate(2px, -2px);
+            }
+            60% {
+                text-shadow: -2px 0 #ff2a6d, 2px 0 #05d9e8;
+                transform: translate(-2px, 2px);
+            }
+            80% {
+                text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8;
+                transform: translate(0);
+            }
+            100% {
+                text-shadow: -2px 0 #d300c5, 2px 0 #00ff9d;
+                transform: translate(0);
+            }
+        }
+
+        .glitch-effect {
+            animation: glitch 1s linear infinite;
+            color: #ff2a6d;
+            text-shadow: 0 0 10px #ff2a6d;
+            font-size: 3.5rem;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        /* ===== Footer ===== */
+        footer {
+            background-color: #000000;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #ff2a6d;
+            color:#ff2a6d;
+            text-shadow: 0 0 10px #ff2a6d;
+        }
+		
+        .watermark {
+            color: #05d9e8;
+            font-weight: 700;
+            text-shadow: 0 0 5px #05d9e8;
+		}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px; 
+            width: auto;
+            filter: drop-shadow(0 0 5px #ff2a6d) 
+            drop-shadow(0 0 10px #05d9e8);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            filter: drop-shadow(0 0 8px #ff2a6d) 
+            drop-shadow(0 0 15px #05d9e8)
+            hue-rotate(45deg);
+        }  
+
+    </style>
+</head>
+<body>
+   
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="homepage.html" class="logo">
+                    <img src="images/LOGO ORIGINAL.png" alt="ATLAS Logo" class="logo-img">
+                    ATLAS
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="cyberware.html">Cyberware</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <h1 class="glitch-effect">CYBERZONE</h1>
+            <p>Cyberzone is a futuristic hub where technology and society intertwine. Towering skyscrapers pulse with neon lights, AI-driven systems control the streets, and a web of underground networks fuels the digital underworld. It's a place where innovation meets rebellion, and every shadow holds a story waiting to be uncovered.</p>
+        </div>
+    <!-- Arrow -->
+    <div class="arrow">↓</div>
+
+    <!-- VERTICAL TIMELINE -->
+    <div class="timeline">
+        <!-- 1980s -->
+        <div class="era">
+            <h2 class="cyber-bullet">1980s</h2>
+            <span class="era-subtitle">"The Mechanical Revolution"</span>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// MK.1 PROSTHETIC ARM</h3>
+                <p class="cyber-desc">Primitive myoelectric limb with basic grip functions. Required external power pack. Often malfunctioned in rain.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: BIOTECHNICA</span><br>
+                    <span>STATUS: DISCONTINUED</span><br>
+                    <span>STREET CRED: 5</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// PACEMAKER X-1</h3>
+                <p class="cyber-desc">First computerized cardiac regulator. Prone to hacking by early netrunners. Caused 23 deaths in 1989.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: MEDTECH</span><br>
+                    <span>STATUS: BANNED</span><br>
+                    <span>FAILURE RATE: 12%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1990s -->
+        <div class="era">
+            <h2 class="cyber-bullet">1990s</h2>
+            <span class="era-subtitle">"Neural Dawn"</span>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// NEURAL LINK v3.2</h3>
+                <p class="cyber-desc">First successful brain-machine interface. Allowed control of prosthetics via nerve impulses. Required monthly recalibration.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: ARASAKA</span><br>
+                    <span>CYBERPSYCHOSIS CASES: 17</span><br>
+                    <span>PRICE: ¥85,000</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// TITANIUM BONE LACING</h3>
+                <p class="cyber-desc">Subdermal reinforcement for military spec-ops. Reduced fracture risk by 80%. Caused chronic joint inflammation.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: MILITECH</span><br>
+                    <span>BODYWEIGHT INCREASE: +12KG</span><br>
+                    <span>STREET NAME: "BONE CRUSHER"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2000s -->
+        <div class="era">
+            <h2 class="cyber-bullet">2000s</h2>
+            <span class="era-subtitle">"The Augmentation Boom"</span>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// KERENZIKOV BOOSTER</h3>
+                <p class="cyber-desc">Reflex accelerator that provided 300ms advantage in combat situations. Caused severe nausea in 40% of users.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: KANG TAO</span><br>
+                    <span>ILLEGAL IN: 12 COUNTRIES</span><br>
+                    <span>STREET PRICE: ¥45,000</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// OPTICAM v2</h3>
+                <p class="cyber-desc">First commercial retinal implant with 4x zoom and low-light vision. Required weekly antivirus scans.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: PETROCHIM</span><br>
+                    <span>RECALLED: 2007</span><br>
+                    <span>DEFECT RATE: 8%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2010s -->
+        <div class="era">
+            <h2 class="cyber-bullet">2010s</h2>
+            <span class="era-subtitle">"The Human 2.0 Era"</span>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// SMARTLINK SYSTEM</h3>
+                <p class="cyber-desc">Neural interface for weapon systems. 95% accuracy improvement. Mandatory for corporate security forces.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: MILITECH</span><br>
+                    <span>STANDARD ISSUE: NCPD</span><br>
+                    <span>HACKING INCIDENTS: 142</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// SUBDERMAL ARMOR</h3>
+                <p class="cyber-desc">Carbon-fiber mesh implanted beneath skin. Stopped 9mm rounds at point-blank range. Caused 15% loss of tactile sensitivity.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: ARASAKA</span><br>
+                    <span>BULLET RESISTANCE: IIIA</span><br>
+                    <span>STREET NAME: "CHROME SKIN"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2020s+ -->
+        <div class="era">
+            <h2 class="cyber-bullet">2020s+</h2>
+            <span class="era-subtitle">"Post-Human Evolution"</span>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// FULL BORG CONVERSION</h3>
+                <p class="cyber-desc">Complete body replacement with military-grade chassis. 98% human consciousness retention. Only 12% voluntary return rate.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: ARASAKA</span><br>
+                    <span>CYBERPSYCHOSIS RATE: 73%</span><br>
+                    <span>PRICE: ¥8,500,000</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h3 class="cyber-name">// NEURAL UPLOAD PROTOCOL</h3>
+                <p class="cyber-desc">Digitize human consciousness into secure engram. 42 confirmed successful transfers. 11 confirmed copies exist simultaneously.</p>
+                <div class="cyber-stats">
+                    <span>MANUFACTURER: SOULKILLER LLC</span><br>
+                    <span>LEGAL STATUS: UNREGULATED</span><br>
+                    <span>ETHICS RATING: Ω</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CYBERPUNK MEDIA ERA -->
+        <div class="era">
+            <h2 class="cyber-bullet">CYBERZONE MEDIA</h2>
+            <span class="era-subtitle">"Datastream"</span>
+            
+            <!-- Movies & Shows Card -->
+            <div class="cyber-card">
+                <h3 class="cyber-name"><span class="icon">🔹</span> MOVIES & SHOWS</h3>
+                <div class="media-display">
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://picfiles.alphacoders.com/198/198975.jpg');">
+                            <div class="media-label">BLADE RUNNER (1982)</div>
+                        </div>
+                        <p class="media-desc">"Dystopian future with replicants and neon skies"</p>
+                    </div>
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://x5f9g8z5.rocketcdn.me/wp-content/uploads/2017/04/16864594_1874528736123024_7584949280647813482_n.png');">
+                            <div class="media-label">GHOST IN THE SHELL (1995)</div>
+                        </div>
+                        <p class="media-desc">"Cybernetic detective questioning AI and identity"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Books & Literature Card -->
+            <div class="cyber-card">
+                <h3 class="cyber-name"><span class="icon">📚</span> BOOKS & LITERATURE</h3>
+                <div class="media-display">
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://th.bing.com/th/id/OIP.UsnEw33abaFIjXFvxJafLwAAAA?rs=1&pid=ImgDetMain');">
+                            <div class="media-label">NEUROMANCER</div>
+                        </div>
+                        <p class="media-desc">"The novel that created cyberpunk"</p>
+                    </div>
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://www.ibs.it/images/9788804754428_0_536_0_75.jpg');">
+                            <div class="media-label">Snow Crash</div>
+                        </div>
+                        <p class="media-desc">"A fast-paced mix of hacking and VR"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Games Card -->
+            <div class="cyber-card">
+                <h3 class="cyber-name"><span class="icon">🎮</span> GAMES</h3>
+                <div class="media-display">
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://cdn1.epicgames.com/offer/77f2b98e2cef40c8a7437518bf420e47/EGS_Cyberpunk2077_CDPROJEKTRED_S1_03_2560x1440-359e77d3cd0a40aebf3bbc130d14c5c7');">
+                            <div class="media-label">CYBERPUNK 2077</div>
+                        </div>
+                        <p class="media-desc">"Open-world RPG with hacking and cyberware"</p>
+                    </div>
+                    <div class="media-holo-card">
+                        <div class="holo-image" style="background-image: url('https://th.bing.com/th/id/OIP.Fye3hs5yt6LNKTUu02SaGwAAAA?rs=1&pid=ImgDetMain');">
+                            <div class="media-label">DEUS EX</div>
+                        </div>
+                        <p class="media-desc">"A game about cybernetic augmentation and conspiracies"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 ATLAS. All rights reserved.</p>
+    </footer>
+</body>
+</html>
